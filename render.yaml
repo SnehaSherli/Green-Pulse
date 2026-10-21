@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: greenpulse
+    runtime: node
+    plan: free
+    region: singapore
+    buildCommand: npm run install:all && npm run build
+    startCommand: npm start
+    healthCheckPath: /api/healthz
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: COOKIE_SECURE
+        value: "true"
+      - key: SEED_ON_START
+        value: "true"
+      - key: JWT_SECRET
+        generateValue: true
+      - key: MONGODB_URI
+        sync: false
